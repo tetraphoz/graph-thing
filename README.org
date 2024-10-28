@@ -5,6 +5,12 @@ Decidimos usar [[https://kivy.org/][kivy]] para crear la interface.
 * Requerimientos
 + Python 3.12
 + El proyecto usa [[https://github.com/pypa/pipenv][pipenv]] para el manejo de dependencias.
+** Screenshots
+
++ Tablero redimensionable
+
+  #+html: <p align="center"><img src="docs/demo0.png" /><img src="docs/demo1.png" /></p>
+
 * Pendientes
 ** TODO Implementar algoritmo BFS
 ** TODO Implementar algoritmo A*
