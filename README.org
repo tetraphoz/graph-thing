@@ -1,19 +1,62 @@
 #+title: Proyecto de visualización de algoritmos de búsqueda
 
-Decidimos usar [[https://kivy.org/][kivy]] para crear la interface.
+Una aplicación interactiva desarrollada en [[https://kivy.org/][Kivy]] que permite visualizar algoritmos de búsqueda en grafos sobre una cuadrícula redimensionable. La aplicación proporciona una interfaz gráfica intuitiva donde los usuarios pueden seleccionar nodos y observar el proceso de búsqueda en tiempo real.
+Están planeados tres algoritmos de búsqueda: DFS, BFS y A*
 
-* Requerimientos
-+ Python 3.12
-+ El proyecto usa [[https://github.com/pypa/pipenv][pipenv]] para el manejo de dependencias.
-** Screenshots
+#+html: <p align="center"><img src="docs/demo0.png" /><img src="docs/demo1.png" /></p>
 
-+ Tablero redimensionable
+* Dependencias
++ Python 3.x
++ [[https://github.com/pypa/pipenv][Pipenv]] para el manejo de dependencias
++ Kivy
 
-  #+html: <p align="center"><img src="docs/demo0.png" /><img src="docs/demo1.png" /></p>
+* Características
+- Cuadrícula interactiva de nodos
+- Nodo inicial (verde) y nodo objetivo (rojo) predefinidos
+- Elección de nodos mediante click
+- Botón de reinicio para limpiar la selección
+- Implementación de algoritmo de búsqueda
 
-* Pendientes
-** TODO Implementar algoritmo BFS
-** TODO Implementar algoritmo A*
-** DONE Limpiar botones al finalizar visualizacion
-Esto tmb debe de funcionar cuando este corriendo la animacion para cancelarla
-** DONE Solo permitir que una animacion corra a la vez
+* Instalación
+
+1. Instalar python 3.x y [[https://github.com/pypa/pipenv][Pipenv]]
+2. Clonar el repositorio:
+   #+begin_src bash
+        git clone https://github.com/tetraphoz/graph-thing
+        cd graph-thing
+   #+end_src
+3. Instalar dependecias en entorno virutal:
+   #+begin_src bash
+        pipenv install
+        pipenv shell
+   #+end_src
+
+* Uso
+
+1. Ejecutar la aplicación:
+   #+begin_src bash
+        python main.py
+   #+end_src
+
+1. Interactuar con la cuadrícula:
+   - Click en los nodos para seleccionarlos/deseleccionarlos
+   - Usar el botón "Reiniciar" para limpiar todas las selecciones
+   - Usar el botón "Buscar" para iniciar el algoritmo de búsqueda
+   - Usar el botón de algoritmo para seleccionar el metodo de busqueda
+
+* Próximas Características
+
+- [ ] Implementación de algoritmo A*
+- [ ] Implementación de algoritmo BFS
+- [X] Visualización del camino encontrado
+- [ ] Ajuste de velocidad de animación
+- [X] Selección de diferentes algoritmos de búsqueda
+- [ ] Estadísticas de la búsqueda (nodos explorados, tiempo, etc.)
+
+* Contribuir
+
+Las contribuciones son bienvenidas. Por favor, abre un issue para discutir los cambios que te gustaría realizar.
+
+* Licencia
+
+Este proyecto está bajo la Licencia MIT
