@@ -111,21 +111,27 @@ class MainLayout(BoxLayout):
         self.add_widget(button_layout)
 
     def reiniciar(self, instance):
+        # Reiniciar animaciones
+        for button in self.search_widget.buttons:
+            Animation.cancel_all(button, 'background_color')
+
         # Descongelar botones
         for i, button in enumerate(self.search_widget.buttons):
             if i != 0 and i != 99:
                 button.is_toggeable = True
-                button.is_toggled = False
-
-        # TODO: Implementar reinicio
+                if button.is_toggled:
+                    button.toggle()
+                else:
+                    button.background_color = button.default_color
 
     def buscar(self, instance):
         # Congelar botones
         for button in self.search_widget.buttons:
             button.is_toggeable = False
 
-        # TODO: Si la busqueda esta en progreso desactivar este boton
-
+        # Cancelar animaciones por si acaso
+        for button in self.search_widget.buttons:
+            Animation.cancel_all(button, 'background_color')
 
         # Obtener el valor del spinner
         busqueda_sel = self.spinner.text
@@ -151,7 +157,8 @@ class MainLayout(BoxLayout):
         if not path or index >= len(path):
             return
 
-        head = self.search_widget.buttons[path[index]]
+        # Tenemos que usar una lista de colores para poder animar
+        head = self.search_widget.buttons[path[index+1]] # Brincamos celda inicial
         anim = Animation(background_color=[0, 1, 0, 1], duration=0.1) + \
                Animation(background_color=[0.7, 1, 0.7, 1], duration=0.1)
 
