@@ -1,0 +1,14 @@
+#+title: Proyecto de visualización de algoritmos de búsqueda
+
+Decidimos usar [[https://kivy.org/][kivy]] para crear la interface.
+
+* Requerimientos
++ Python 3.12
++ El proyecto usa [[https://github.com/pypa/pipenv][pipenv]] para el manejo de dependencias.
+* Pendientes
+** TODO Limpiar botones al finalizar visualizacion
+Esto tmb debe de funcionar cuando este corriendo la animacion para cancelarla
+** TODO Usar spinner para seleccionar que algoritmo usar
+** TODO Implementar algoritmo BFS
+** TODO Implementar algoritmo A*
+** TODO Solo permitir que una animacion corra a la vez
