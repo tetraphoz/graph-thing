@@ -9,6 +9,7 @@ from kivy.uix.popup import Popup
 from kivy.animation import Animation
 from kivy.uix.label import Label
 import sys
+import heapq
 
 
 # CASILLAS = int(sys.argv[1])
@@ -77,12 +78,78 @@ class Search(GridLayout):
         return None  # No path found
 
     def bfs(self):
-        # TODO: Implementar
-        pass
+        start = 0
+        end = CASILLAS ** 2 - 1
+
+        queue = [(start, [start])]
+        visited = set()
+
+        while queue:
+            current, path = queue.pop(0)
+
+            if current == end:
+                return path
+
+            if current not in visited:
+                visited.add(current)
+
+                for neighbor in self.get_neighbours(current):
+                    if neighbor not in visited and not self.buttons[neighbor].is_toggled:
+                        queue.append((neighbor, path + [neighbor]))
+            
+        return None  # No path found
+
+
+    def traced_path(self, desde, current):
+        total_path = [current]
+
+        while current in desde:
+            current = desde[current]
+            total_path.append(current)
+
+        total_path.reverse()
+        return total_path
+
+    def heuristic(self, node, end):
+        x_1, y_1 = divmod(node, CASILLAS)
+        x_2, y_2 = divmod(end, CASILLAS)
+
+        h = abs(x_1 - x_2) + abs(y_1 - y_2)
+        return h
 
     def a_star(self):
-        # TODO: Implementar
-        pass
+        start = 0
+        end = CASILLAS ** 2 - 1
+
+        open_set = []
+        heapq.heappush(open_set, (0, start))
+
+        desde = {}
+        costo = {node: float('inf') for node in range(CASILLAS ** 2)}
+        costo[start] = 0
+
+        costo_estimado = {node: float('inf') for node in range(CASILLAS ** 2)}
+        costo_estimado[start] = self.heuristic(start, end)
+        
+        while open_set:
+            current = heapq.heappop(open_set)[1]
+
+            if current == end:
+                return self.traced_path(desde, current)
+
+            for neighbor in self.get_neighbours(current):
+                if not self.buttons[neighbor].is_toggled:
+                    costo_tentativo = costo[current] + 1  
+
+                    if costo_tentativo < costo[neighbor]:
+                        desde[neighbor] = current
+                        costo[neighbor] = costo_tentativo
+                        costo_estimado[neighbor] = costo[neighbor] + self.heuristic(neighbor, end)
+
+                        if neighbor not in [i[1] for i in open_set]:
+                            heapq.heappush(open_set, (costo_estimado[neighbor], neighbor))
+
+        return None  # No path found
 
 
 class MainLayout(BoxLayout):
